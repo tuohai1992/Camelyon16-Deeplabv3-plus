@@ -204,7 +204,7 @@ def load_data(image_path, mask_path, sample_weight=1, H=H, W=W, augment=False):
 train_dataset = tf.data.Dataset.from_tensor_slices((image_list,
                                                 mask_list))
 
-train_dataset = train_dataset.shuffle(buffer_size=6000)
+train_dataset = train_dataset.shuffle(buffer_size=3000)
 train_dataset = train_dataset.apply(
 tf.data.experimental.map_and_batch(
     map_func=lambda x, y: load_data(image_path=x, mask_path=y, augment=AUGMENT),
