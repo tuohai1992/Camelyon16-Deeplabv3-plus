@@ -1,7 +1,7 @@
 # Camelyon16-Deeplabv3-plus
 Deeplabv3+ training and prediction pipeline for camelyon16 dataset
 
-### Camelyon16 data preprocessing(TODO):
+### Camelyon16 data preprocessing description (TODO):
 
 ### Options for model training (can be set up in train.sh):
 
@@ -52,4 +52,4 @@ mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca
 * `sklearn`
 
 
-### Camelyon16 data postprocessing(TODO):
+### Camelyon16 data postprocessing description (TODO):
