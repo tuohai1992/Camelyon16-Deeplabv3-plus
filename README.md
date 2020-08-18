@@ -3,7 +3,9 @@ Deeplabv3+ training and prediction pipeline for camelyon16 dataset
 
 ### Camelyon16 data preprocessing description (TODO):
 
-### Options for model training (can be set up in train.sh):
+### Training :
+
+## Options for model training (can be set up in train.sh):
 
 optional arguments:
 
@@ -24,7 +26,7 @@ optional arguments:
 
 
 ```
-### Running on LISA GPU
+## Running on LISA GPU
 
 Start training with CAMELYON16 dataset on LISA GPU with patch size 1024x1024, on two titanrtx GPU nodes
 
@@ -44,7 +46,7 @@ mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca
     --log_dir     /home/jli/examode/camelyon-master/CAMELYON16_PREPROCESSING/level_3_patch/tmp/train_data \
     --weight_path /home/jli/examode/camelyon-master/CAMELYON16_PREPROCESSING/level_1_patch/tmp_cam16 \
 ```
-### Requirements(training)
+## Requirements(training)
 * `python = 3.7.4`
 * `tensorflow-gpu = 2.0.0`
 * `horovod = 0.18.2`
