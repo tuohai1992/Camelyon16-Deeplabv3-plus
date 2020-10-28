@@ -5,11 +5,12 @@
 #SBATCH -n 8
 #SBATCH -c 6
 
-mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib python /home/jli/examode/camelyon-master/CAMELYON16_PREPROCESSING/github_camelyon/train.py \
+mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib python /home/jli/examode/camelyon-master/CAMELYON16_PREPROCESSING/github_camelyon16/train.py \
     --img_size  1024 \
     --epochs    50 \
     --batch_size 2 \
-    --num_steps  50000 \
+    --num_steps  2000 \
+    --neg_pos_ratio 3 \
     --horovod  True \
     --flip     True \
     --augment  True \
