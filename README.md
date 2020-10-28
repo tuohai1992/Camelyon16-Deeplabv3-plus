@@ -14,7 +14,7 @@ optional arguments:
 --epochs           : number of epochs for training (default:20)
 --batch_size       : Batch size to use (default:2)
 --num_steps        : Number of steps for training (default:50000)
---neg_pos_ratio   : Ratio of negative to positive sample in data set for training
+--neg_pos_ratio    : Ratio of negative to positive sample in data set for training
 --horovod          : Distributed training via horovod'(default:True)
 --flip             : Flip training image horizontally (left to right) (default:True)
 --augment          : Implement color argumentation (default:True)
