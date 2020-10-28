@@ -26,6 +26,7 @@ parser.add_argument('--img_size',type=int, required =True, default= 1024,help ='
 parser.add_argument('--epochs',type=int, required =True, default= 50,help ='number of epochs for training' )
 parser.add_argument('--batch_size',type=int, required =True, default= 50,help ='Batch size to use' )
 parser.add_argument('--num_steps',type=int, required =True, default= 50000,help ='Number of steps for training' )
+parser.add_argument('--neg_pos_ratio',type=int, required =True, default= 1,help ='Ratio of negative to positive sample in data set for training' )
 parser.add_argument('--horovod',type= str, required =True, default= 'True',help ='Distributed training via horovod' )
 parser.add_argument('--flip',type= str, required =True, default= 'True',help ='Flip an image horizontally (left to right)' )
 parser.add_argument('--augment',type= str, required =True, default= 'True',help ='Implement color argumentation' )
@@ -48,9 +49,11 @@ print('TensorFlow', tf.__version__)
 IMG_SIZE                = args.img_size
 EPOCHS                  = args.epochs
 BATCH_SIZE              = args.batch_size
-STEPS                   = args.num_steps     
+STEPS                   = args.num_steps  
+RATIO                   = args.neg_pos_ratio   
 H, W                    = IMG_SIZE, IMG_SIZE  
 num_classes             = 2
+ 
 if args.horovod =='True':
     HOROVOD = True
 else:
@@ -111,17 +114,27 @@ image_neg_list = [ x for x in glob.glob(os.path.join(TRAIN_NORMAL_IMAGE_PATH, '*
 
 mask_neg_list = [ x for x in glob.glob(os.path.join(TRAIN_NORMAL_MASK_PATH, '*.png'))]
 
-# image_neg_use, image_neg_unuse, mask_neg_use, mask_neg_unuse = train_test_split(image_neg_list,mask_neg_list,test_size=0.26,random_state=43)
+pos_img_num = len(image_pos_list)
 
+neg_img_num = len(image_neg_list)
 
+neg_img_num_use= pos_img_num * RATIO
 
+if neg_img_num_use > neg_img_num:
+    image_list = image_pos_list + image_neg_list
+    mask_list = mask_pos_list + mask_neg_list
+    
+else:
 
-image_list = image_pos_list + image_neg_list
-mask_list = mask_pos_list + mask_neg_list
+    por_use_neg= round(neg_img_num_use/neg_img_num,2)
+
+    image_neg_use, image_neg_unuse, mask_neg_use, mask_neg_unuse = train_test_split(image_neg_list,mask_neg_list,test_size=1-por_use_neg,random_state=43)
+
+    image_list = image_pos_list + image_neg_use
+    mask_list = mask_pos_list + mask_neg_use
 
 
 image_list, val_image_list, mask_list, val_mask_list = train_test_split(image_list,mask_list,test_size=0.15,random_state=42)
-
 
 
 
