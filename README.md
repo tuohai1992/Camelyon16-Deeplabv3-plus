@@ -37,6 +37,7 @@ mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca
     --epochs    20 \
     --batch_size 2 \
     --num_steps  50000 \
+    --neg_pos_ratio 3 \
     --horovod  True \
     --flip     True \
     --augment  True \
