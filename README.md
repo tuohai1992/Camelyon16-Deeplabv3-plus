@@ -54,6 +54,8 @@ mpirun -oversubscribe -map-by ppr:2:socket -np 8 -x LD_LIBRARY_PATH -x PATH -mca
 * `horovod = 0.18.2`
 * `cuda = 10.0`
 * `sklearn`
+* `Openslide`
+* `Opencv`
 
 
 ## Camelyon16 data postprocessing description (TODO):
